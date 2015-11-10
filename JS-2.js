@@ -58,26 +58,24 @@ function solution2(s){
 function solution3(a, f){
   var arg, 
       func, 
-      functionToApply,
       functionBody, 
       result = [],
-      patternArg = /(\(?)(\w*)(\)?)(?=\=>)/,
-      patternExp = /(\=>)(.+$)/;
+      patternArg = /(\(?)([a-z,\,]*)(\)?)(?=\=>)/i,
+      patternExp = /(\=>)(.+)/i;
   arg = patternArg.exec(f);
   func = patternExp.exec(f);
   functionBody = 'return ' + func[2];
-  if (arg[2] == '') {
-    functionToApply = new Function(functionBody);  
-  } else {
-    var functionToApply = new Function(arg[2], functionBody);
-  }
+  var functionToApply = new Function(arg[2], functionBody);
   for (var i = 0; i < a.length; i++){
-    result[i] = functionToApply(a[i]);
+    result[i] = functionToApply(a[i],i,a);
   }
   return result;
 }
-var mas = [1,0,4.6,6,2,3,-7,9,8,5,11];
-alert(solution11(mas));
-alert(solution12(mas));
-alert(solution2('({){'));
-alert(solution3([1,2],'(a)=>a*2'));
+var mas = [1,2.5,6,2,3,-7];
+alert('The minimal positive integer not present in array: ['+mas+'] is '+solution11(mas));
+alert('The minimal positive integer not present in array: ['+mas+'] is '+solution12(mas));
+var str = '({){';
+alert('String '+str+' is bracket balanced: '+solution2(str));
+var mas2 = [1,2,7],
+    arrowFunc = '(a)=>a+2';
+alert('The arrow function '+arrowFunc+' on array ['+mas2+'] returns ['+solution3(mas2,arrowFunc)+']');

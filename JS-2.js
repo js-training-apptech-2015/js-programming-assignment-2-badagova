@@ -8,15 +8,20 @@ function solution11(a){ // Task #1 using .indexOf
 }
 
 function solution12(a){ // Task #1 without .indexOf
-  var j = 1, i = 0;
+  var j = 1, 
+      i = 0,
+      tempArr = [];
+  for(i = 0; i < a.length; i++){
+    tempArr[a[i]]=1;
+  }
+  i = 1;
   while(i <= a.length){
-    if (a[i]===j) {
-      j++;
-      i=-1;
-    };
+    if (tempArr[i] == undefined){
+      break;
+    }
     i++;
   }
-  return j;
+  return i;
 }
 
 function solution2(s){
@@ -71,7 +76,7 @@ function solution3(a, f){
   }
   return result;
 }
-var mas = [1,2.5,6,2,3,-7];
+var mas = [0,4,6,2,3,5];
 alert('The minimal positive integer not present in array: ['+mas+'] is '+solution11(mas));
 alert('The minimal positive integer not present in array: ['+mas+'] is '+solution12(mas));
 var str = '({){';
